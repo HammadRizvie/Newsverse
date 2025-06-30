@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # Development service
+  newsverse-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_NEWS_API_URL=https://newsapi.org/v2
+      - REACT_APP_NEWS_API_KEY=${REACT_APP_NEWS_API_KEY:-your_api_key_here}
+      - REACT_APP_GUARDIAN_URL=https://content.guardianapis.com
+      - REACT_APP_GUARDIAN_KEY=${REACT_APP_GUARDIAN_KEY:-your_guardian_key_here}
+    stdin_open: true
+    tty: true
+    profiles:
+      - dev
+
+  # Production service
+  newsverse-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    profiles:
+      - prod
+
+  # Production service with custom port
+  newsverse-prod-custom:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    profiles:
+      - prod-custom 

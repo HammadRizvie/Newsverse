@@ -1,70 +1,137 @@
-# Getting Started with Create React App
+# Newsverse
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern news aggregation web app built with React, TypeScript, and Material UI. Newsverse fetches and displays news from multiple APIs (NewsAPI, The Guardian) with a clean, responsive UI.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Quick Start
 
-### `npm start`
+### 1. Local Development (without Docker)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+# Install dependencies
+npm install
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Start the development server
+npm start
 
-### `npm test`
+# App runs at http://localhost:3000
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 2. Build for Production
 
-### `npm run build`
+```bash
+npm run build
+# Output in the build/ directory
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 3. Run Tests
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm test
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🐳 Docker Usage
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Prerequisites
+- Docker Desktop (Windows/Mac) or Docker Engine (Linux)
+- (Optional) Docker Compose
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 1. Development Mode (with Hot Reload)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Using PowerShell Script (Recommended on Windows)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Edit your API keys in `run-docker-dev.ps1` if needed, then run:
 
-## Learn More
+```powershell
+powershell -ExecutionPolicy Bypass -File .\run-docker-dev.ps1
+```
+- App runs at http://localhost:3000
+- Hot reload enabled
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Using Docker Compose
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+docker-compose --profile dev up --build
+```
 
-### Code Splitting
+#### Manual Docker Commands
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+docker build -f Dockerfile.dev -t newsverse-dev .
+docker run -p 3000:3000 \
+  -e REACT_APP_NEWS_API_URL="https://newsapi.org/v2" \
+  -e REACT_APP_NEWS_API_KEY="your_news_api_key" \
+  -e REACT_APP_GUARDIAN_URL="https://content.guardianapis.com" \
+  -e REACT_APP_GUARDIAN_KEY="your_guardian_api_key" \
+  newsverse-dev
+```
 
-### Analyzing the Bundle Size
+### 2. Production Mode
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+docker build -t newsverse-prod .
+docker run -p 80:80 newsverse-prod
+# Or with Docker Compose
+# docker-compose --profile prod up --build
+```
+- App runs at http://localhost (port 80)
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## ⚙️ Environment Variables
 
-### Advanced Configuration
+All API keys and endpoints must be set as environment variables **at build time** (for Create React App):
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+| Variable                      | Description                        | Example Value                        |
+|-------------------------------|------------------------------------|--------------------------------------|
+| REACT_APP_NEWS_API_URL        | NewsAPI base URL                   | https://newsapi.org/v2               |
+| REACT_APP_NEWS_API_KEY        | NewsAPI key                        | 57c734c0ceee4c31821bcfdeb1e7c749     |
+| REACT_APP_GUARDIAN_URL        | Guardian API base URL              | https://content.guardianapis.com     |
+| REACT_APP_GUARDIAN_KEY        | Guardian API key                   | a5a0379f-6d6e-45a4-af5f-6be2d26a4414 |
 
-### Deployment
+You can copy `env.example` to `.env` and fill in your keys for local development.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## 🛠️ Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+newsverse/
+  src/
+    components/      # Reusable UI components
+    pages/           # Page-level components
+    context/         # React context providers
+    constants/       # API endpoints, config
+    utils/           # Utility functions
+    types/           # TypeScript types
+```
+
+---
+
+## 🐞 Troubleshooting
+
+- **APIs not working in Docker?**
+  - Make sure you set the correct API keys in your environment variables or Docker run command.
+  - For local APIs, use `host.docker.internal` instead of `localhost` in your API URLs.
+  - Rebuild the Docker image after changing environment variables.
+- **Hot reload not working in Docker?**
+  - Use the provided PowerShell script or Docker Compose for proper volume mounting.
+- **CORS issues?**
+  - Ensure your API server allows requests from your frontend's origin.
+
+---
+
+## 📄 License
+
+MIT
+
+---
+
+## ✨ Credits
+- [Create React App](https://github.com/facebook/create-react-app)
+- [Material UI](https://mui.com/)
+- [NewsAPI](https://newsapi.org/)
+- [The Guardian Open Platform](https://open-platform.theguardian.com/)
