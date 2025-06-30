@@ -1,0 +1,11 @@
+export const NEWS_API_BASE_URL = process.env.REACT_APP_NEWS_API_URL;
+export const NEWS_API_KEY = process.env.REACT_APP_NEWS_API_KEY; 
+export const GUARDIAN_API_BASE_URL = process.env.REACT_APP_GUARDIAN_URL; 
+export const GUARDIAN_API_KEY = process.env.REACT_APP_GUARDIAN_KEY; 
+export const GUARDIAN_ARTICLES_END_POINT = '/search'; 
+export const ARTICLES_API_END_POINT = "/top-headlines"; 
+export const EVERYTHING_API_END_POINT = "/everything"; 
+export const NEWS_API_COUNTRY = 'us'; 
+export const NEWS_API_DOMAIN = 'techcrunch.com,thenextweb.com'; 
+export const GUARDIAN_FIELDS = 'headline,byline,body,thumbnail,publication'; 
+export const GUARDIAN_TAGS = 'contributor,keyword'; 
