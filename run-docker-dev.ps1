@@ -21,6 +21,8 @@ docker run -d `
   -e REACT_APP_NEWS_API_KEY="57c734c0ceee4c31821bcfdeb1e7c749" `
   -e REACT_APP_GUARDIAN_URL="https://content.guardianapis.com" `
   -e REACT_APP_GUARDIAN_KEY="a5a0379f-6d6e-45a4-af5f-6be2d26a4414" `
+  -e REACT_APP_NYT_URL="https://api.nytimes.com" `
+  -e REACT_APP_NYT_KEY="WddfnPIJFQcwYycJVRi2zZLOYXZ1ttnv" `
   --name newsverse-dev-container `
   newsverse-dev
 

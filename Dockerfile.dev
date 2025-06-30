@@ -19,6 +19,7 @@ EXPOSE 3000
 # Set default environment variables (can be overridden at runtime)
 ENV REACT_APP_NEWS_API_URL=https://newsapi.org/v2
 ENV REACT_APP_GUARDIAN_URL=https://content.guardianapis.com
+ENV REACT_APP_NYT_URL=https://api.nytimes.com
 
 # Start development server
 CMD ["npm", "start"] 

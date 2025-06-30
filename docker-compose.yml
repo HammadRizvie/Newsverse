@@ -18,6 +18,8 @@ services:
       - REACT_APP_NEWS_API_KEY=${REACT_APP_NEWS_API_KEY:-your_api_key_here}
       - REACT_APP_GUARDIAN_URL=https://content.guardianapis.com
       - REACT_APP_GUARDIAN_KEY=${REACT_APP_GUARDIAN_KEY:-your_guardian_key_here}
+      - REACT_APP_NYT_URL=https://api.nytimes.com
+      - REACT_APP_NYT_KEY=${REACT_APP_NYT_KEY:-WddfnPIJFQcwYycJVRi2zZLOYXZ1ttnv}
     stdin_open: true
     tty: true
     profiles:

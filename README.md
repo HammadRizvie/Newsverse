@@ -1,118 +1,123 @@
-# Newsverse
+# Newsverse - News Aggregate Challenge App
 
-A modern news aggregation web app built with React, TypeScript, and Material UI. Newsverse fetches and displays news from multiple APIs (NewsAPI, The Guardian) with a clean, responsive UI.
-
----
-
-## 🚀 Quick Start
-
-### 1. Local Development (without Docker)
-
-```bash
-# Install dependencies
-npm install
-
-# Start the development server
-npm start
-
-# App runs at http://localhost:3000
-```
-
-### 2. Build for Production
-
-```bash
-npm run build
-# Output in the build/ directory
-```
-
-### 3. Run Tests
-
-```bash
-npm test
-```
+## Live Deployed Link: https://newzpk.onrender.com/
 
 ---
 
-## 🐳 Docker Usage
+## Introduction
+Welcome to the Newsverse application documentation. This project is a comprehensive news aggregator built with React.js and TypeScript. The application integrates multiple news sources (NewsAPI, The Guardian, and NYT API) to provide users with a personalized and seamless news reading experience across both desktop and mobile devices.
+
+---
+
+## UI/UX Inspiration
+The user interface and user experience design are inspired by https://gossip-themes.com/beatrix-html, focusing on a clean, magazine-like layout that enhances readability and navigation.
+
+---
+
+## Key Features
+
+### Categories Navigation
+- **Dynamic Category Selection:** Effortlessly navigate through various news categories such as News, Sports, Entertainment, Technology, and more.
+- **Persistent State Management:** Maintains the selected category across sessions.
+- **Responsive Design:** Seamless navigation on both desktop and mobile devices with a mobile-first approach.
+- **Smooth Transitions:** Smooth transitions and animations for category changes.
+
+### Filtration Based on Sources and Categories
+- **Source Filtering:** Filter articles based on selected sources like NewsAPI, The Guardian, and NYT API.
+- **Category Filtering:** Filter articles within specific categories for a more tailored news feed.
+- **Advanced Filter Combinations:** Enhanced filtering options, enabling users to combine multiple filters.
+- **Real-Time Filter Updates:** Filters are applied in real-time, providing instant feedback and updated article lists.
+
+### Customize Feed
+- **Personalized Content:** Customize your news feed by selecting preferred sources, categories, and authors.
+- **Preference Management:** Preferences are managed and persisted, maintaining a tailored news experience across sessions.
+- **Smart Content Deduplication:** Prevents duplicate articles from appearing in the feed.
+- **Multiple Source Selection:** Select multiple news sources simultaneously for a comprehensive news feed.
+
+### Search
+- **Debounced Search Implementation:** Efficient searching, reducing unnecessary API calls.
+- **Real-Time Results:** Instant search results as users input their queries.
+- **Search History Management:** (TODO) Planned feature to allow users to revisit their previous searches.
+
+### Load More
+- **Infinite Scrolling:** Load more articles as the user reaches the end of the current list.
+- **Pagination Handling:** Manages article pagination seamlessly.
+- **Loading State Management:** Visual feedback during the loading of additional articles.
+- **Error Handling:** Gracefully handles errors during data fetching.
+- **Rate Limiting Consideration:** Handles API rate limits, ensuring the application remains functional under heavy usage.
+
+### Skeleton Loading
+- **Progressive Loading UI:** Displays placeholder content while articles are being fetched.
+- **Smooth Transitions:** Smooth user experience during loading states with subtle animations.
+- **Fallback States:** Provides fallback UI in case of loading failures.
+- **Placeholder Components:** Reusable placeholder components standardize the loading experience.
+
+### API Integration
+- **Multiple News Sources:** Integrates NewsAPI, NYT API, and The Guardian API.
+- **Rate Limiting Handling:** Handles API rate limits, especially for NYT API.
+- **Error Management:** Robust error handling for API failures.
+- **Data Normalization:** Standardizes data from different APIs into a consistent Article type.
+- **Cache Implementation:** (TODO) Planned enhancement to implement caching strategies.
+
+### Article List Screen
+- **Detailed Article Information:** Presents comprehensive information about each article, including the title, source, author, publication time, image, and more.
+- **Add to Favorites (TODO):** Allows users to mark articles as favorites.
+- **Responsive Layout:** Fully responsive article list.
+- **Efficient Rendering:** Optimized rendering performance for large lists.
+
+---
+
+## Design Patterns
+- **Container/Presentational Components:** Separates data fetching/state management from UI rendering.
+- **Custom Hooks:** Encapsulates reusable stateful logic (e.g., useArticles, useSearch).
+- **Service Layer for API Integration:** Abstracts API interactions through a dedicated service layer.
+- **Memoization for Performance Optimization:** Uses React.memo, useMemo, and useCallback.
+- **Skeleton Loading Pattern:** Uses placeholder components like ArticleSkeleton.
+- **Modular Architecture:** Organizes the codebase into feature-based modules.
+
+---
+
+## TODO
+- Testing and some optimization are still left due to time constraints.
+- Search history and caching enhancements.
+- Add to Favorites feature.
+
+---
+
+## Docker Setup
 
 ### Prerequisites
-- Docker Desktop (Windows/Mac) or Docker Engine (Linux)
-- (Optional) Docker Compose
+- **Docker Desktop:** Ensure Docker Desktop is installed and running on your machine.
 
-### 1. Development Mode (with Hot Reload)
-
-#### Using PowerShell Script (Recommended on Windows)
-
-Edit your API keys in `run-docker-dev.ps1` if needed, then run:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\run-docker-dev.ps1
+### Environment Variables
+Create a `.env` file in the root directory with the following variables:
 ```
-- App runs at http://localhost:3000
-- Hot reload enabled
+REACT_APP_GUARDIAN_KEY=your_guardian_api_key
+REACT_APP_NYT_KEY=your_nyt_api_key
+REACT_APP_NEWS_API_KEY=your_news_api_key
+```
 
-#### Using Docker Compose
-
+### Building and Running with Docker Compose
+Navigate to the project root and run:
 ```bash
-docker-compose --profile dev up --build
-```
-
-#### Manual Docker Commands
-
-```bash
-docker build -f Dockerfile.dev -t newsverse-dev .
-docker run -p 3000:3000 \
-  -e REACT_APP_NEWS_API_URL="https://newsapi.org/v2" \
-  -e REACT_APP_NEWS_API_KEY="your_news_api_key" \
-  -e REACT_APP_GUARDIAN_URL="https://content.guardianapis.com" \
-  -e REACT_APP_GUARDIAN_KEY="your_guardian_api_key" \
-  newsverse-dev
-```
-
-### 2. Production Mode
-
-```bash
-docker build -t newsverse-prod .
-docker run -p 80:80 newsverse-prod
-# Or with Docker Compose
-# docker-compose --profile prod up --build
-```
-- App runs at http://localhost (port 80)
-
----
-
-## ⚙️ Environment Variables
-
-All API keys and endpoints must be set as environment variables **at build time** (for Create React App):
-
-| Variable                      | Description                        | Example Value                        |
-|-------------------------------|------------------------------------|--------------------------------------|
-| REACT_APP_NEWS_API_URL        | NewsAPI base URL                   | https://newsapi.org/v2               |
-| REACT_APP_NEWS_API_KEY        | NewsAPI key                        | 57c734c0ceee4c31821bcfdeb1e7c749     |
-| REACT_APP_GUARDIAN_URL        | Guardian API base URL              | https://content.guardianapis.com     |
-| REACT_APP_GUARDIAN_KEY        | Guardian API key                   | a5a0379f-6d6e-45a4-af5f-6be2d26a4414 |
-
-You can copy `env.example` to `.env` and fill in your keys for local development.
-
----
-
-## 🛠️ Project Structure
-
-```
-newsverse/
-  src/
-    components/      # Reusable UI components
-    pages/           # Page-level components
-    context/         # React context providers
-    constants/       # API endpoints, config
-    utils/           # Utility functions
-    types/           # TypeScript types
+docker-compose up --build
 ```
 
 ---
 
-## 🐞 Troubleshooting
-
+## Troubleshooting
+- **WSL2 Issues (Windows):**
+  - Enable virtualization in BIOS.
+  - Enable "Virtual Machine Platform" and "Windows Subsystem for Linux":
+    ```
+    dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+    dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+    ```
+  - Set WSL2 as default:
+    ```
+    wsl --set-default-version 2
+    ```
+  - Restart your computer after making changes.
 - **APIs not working in Docker?**
   - Make sure you set the correct API keys in your environment variables or Docker run command.
   - For local APIs, use `host.docker.internal` instead of `localhost` in your API URLs.
@@ -124,14 +129,26 @@ newsverse/
 
 ---
 
-## 📄 License
-
-MIT
-
----
-
-## ✨ Credits
+## Credits
 - [Create React App](https://github.com/facebook/create-react-app)
 - [Material UI](https://mui.com/)
 - [NewsAPI](https://newsapi.org/)
 - [The Guardian Open Platform](https://open-platform.theguardian.com/)
+- [The New York Times API](https://developer.nytimes.com/)
+
+## Limitations & Future Improvements
+
+Due to limited time, some features and improvements could not be fully implemented. If more time were available, I would:
+- Add comprehensive unit testing for all components and utilities
+- Resolve known and unknown bugs
+- Improve and refactor functionality, including:
+  - Make the personalized news feed work robustly with proper state management (e.g., Redux or Context API)
+  - Implement more advanced and reliable filteration logic
+  - Add a complete theme setting (light/dark mode, user preferences)
+  - Enhance error handling and user feedback
+  - Optimize performance and code structure
+  - Polish the UI/UX further
+  - Add search history, caching, and favorites features
+  - And many more enhancements for a production-grade experience
+
+---
