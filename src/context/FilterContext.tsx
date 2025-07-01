@@ -1,25 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-
-interface FilterContextType {
-  fromDate: Date | null;
-  toDate: Date | null;
-  sources: string;
-  category: string;
-  author: string;
-  pendingFromDate: Date | null;
-  pendingToDate: Date | null;
-  pendingSources: string;
-  pendingCategory: string;
-  pendingAuthor: string;
-  setPendingFromDate: (date: Date | null) => void;
-  setPendingToDate: (date: Date | null) => void;
-  setPendingSources: (sources: string) => void;
-  setPendingCategory: (category: string) => void;
-  setPendingAuthor: (author: string) => void;
-  applyFilters: () => void;
-  resetFilters: () => void;
-  resetPendingFilters: () => void;
-}
+import { FilterContextType } from "../types";
 
 const FilterContext = createContext<FilterContextType | undefined>(undefined);
 

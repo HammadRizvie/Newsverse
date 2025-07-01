@@ -173,3 +173,24 @@ export type SearchContextType = {
   setSearchKeyword: (keyword: string) => void;
   resetSearch: () => void;
 }
+
+export type FilterContextType = {
+  fromDate: Date | null;
+  toDate: Date | null;
+  sources: string;
+  category: string;
+  author: string;
+  pendingFromDate: Date | null;
+  pendingToDate: Date | null;
+  pendingSources: string;
+  pendingCategory: string;
+  pendingAuthor: string;
+  setPendingFromDate: (date: Date | null) => void;
+  setPendingToDate: (date: Date | null) => void;
+  setPendingSources: (sources: string) => void;
+  setPendingCategory: (category: string) => void;
+  setPendingAuthor: (author: string) => void;
+  applyFilters: () => void;
+  resetFilters: () => void;
+  resetPendingFilters: () => void;
+}
