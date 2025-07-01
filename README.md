@@ -1,6 +1,6 @@
 # Newsverse - News Aggregate Challenge App
 
-## Live Deployed Link: https://newsverse-o930q5yiu-hammad-rizvis-projects.vercel.app
+## Live Deployed Link: https://newsverse-seven.vercel.app/
 
 ---
 
