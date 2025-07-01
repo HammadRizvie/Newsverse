@@ -30,21 +30,16 @@ The user interface and user experience design are inspired by https://gossip-the
 
 ### Customize Feed
 - **Personalized Content:** Customize your news feed by selecting preferred sources, categories, and authors.
-- **Preference Management:** Preferences are managed and persisted, maintaining a tailored news experience across sessions.
 - **Smart Content Deduplication:** Prevents duplicate articles from appearing in the feed.
-- **Multiple Source Selection:** Select multiple news sources simultaneously for a comprehensive news feed.
 
 ### Search
 - **Debounced Search Implementation:** Efficient searching, reducing unnecessary API calls.
 - **Real-Time Results:** Instant search results as users input their queries.
-- **Search History Management:** (TODO) Planned feature to allow users to revisit their previous searches.
 
 ### Load More
 - **Infinite Scrolling:** Load more articles as the user reaches the end of the current list.
 - **Pagination Handling:** Manages article pagination seamlessly.
 - **Loading State Management:** Visual feedback during the loading of additional articles.
-- **Error Handling:** Gracefully handles errors during data fetching.
-- **Rate Limiting Consideration:** Handles API rate limits, ensuring the application remains functional under heavy usage.
 
 ### Skeleton Loading
 - **Progressive Loading UI:** Displays placeholder content while articles are being fetched.
@@ -54,14 +49,9 @@ The user interface and user experience design are inspired by https://gossip-the
 
 ### API Integration
 - **Multiple News Sources:** Integrates NewsAPI, NYT API, and The Guardian API.
-- **Rate Limiting Handling:** Handles API rate limits, especially for NYT API.
-- **Error Management:** Robust error handling for API failures.
-- **Data Normalization:** Standardizes data from different APIs into a consistent Article type.
-- **Cache Implementation:** (TODO) Planned enhancement to implement caching strategies.
 
 ### Article List Screen
 - **Detailed Article Information:** Presents comprehensive information about each article, including the title, source, author, publication time, image, and more.
-- **Add to Favorites (TODO):** Allows users to mark articles as favorites.
 - **Responsive Layout:** Fully responsive article list.
 - **Efficient Rendering:** Optimized rendering performance for large lists.
 
@@ -69,7 +59,6 @@ The user interface and user experience design are inspired by https://gossip-the
 
 ## Design Patterns
 - **Container/Presentational Components:** Separates data fetching/state management from UI rendering.
-- **Custom Hooks:** Encapsulates reusable stateful logic (e.g., useArticles, useSearch).
 - **Service Layer for API Integration:** Abstracts API interactions through a dedicated service layer.
 - **Memoization for Performance Optimization:** Uses React.memo, useMemo, and useCallback.
 - **Skeleton Loading Pattern:** Uses placeholder components like ArticleSkeleton.
