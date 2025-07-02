@@ -61,7 +61,6 @@ The user interface and user experience design are inspired by https://gossip-the
 - **Container/Presentational Components:** Separates data fetching/state management from UI rendering.
 - **Service Layer for API Integration:** Abstracts API interactions through a dedicated service layer.
 - **Memoization for Performance Optimization:** Uses React.memo, useMemo, and useCallback.
-- **Skeleton Loading Pattern:** Uses placeholder components like ArticleSkeleton.
 - **Modular Architecture:** Organizes the codebase into feature-based modules.
 
 ---
